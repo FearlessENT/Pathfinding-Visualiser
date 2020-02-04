@@ -224,7 +224,7 @@ def create_maze_control():
 
 def create_maze():
 
-    maze_prim.generate_maze(grid)
+    prim.generate_maze(grid)
 
 
 

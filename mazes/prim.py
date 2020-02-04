@@ -44,7 +44,12 @@ def generate_maze(grid):
         random_frontier_node = random.choice(frontier_nodes)
 
         neighbors = get_neighbors(random_frontier_node, grid)
-        random_neighbor = random.choice(neighbors)
+
+        try:
+            random_neighbor = random.choice(neighbors)
+        except Exception:
+            pass
+
 
         # get midpoint from random fronteir node and random neighbor
         midpoint_x = int((random_frontier_node.x + random_neighbor.x) / 2)
@@ -118,8 +123,8 @@ def get_random_node(grid):
     width = len(grid[1])
     height = len(grid)
 
-    randomx = random.randint(2, int(width - 3))
-    randomy = random.randint(2, int(height - 3))
+    randomx = random.randint(2, int(width / 2))
+    randomy = random.randint(2, int(height / 2))
 
     chosen_cell = grid[randomx][randomy]
 
