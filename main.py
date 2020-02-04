@@ -86,7 +86,7 @@ class Interface:
         direc = str(direc) + "\\logo.ico"
         self.tkinter_window.iconbitmap(direc)
 
-        framex = int(WIN_WIDTH * 0.8)
+        framex = int(WIN_WIDTH * 0.7)
         framey = int(WIN_HEIGHT * 0.9)
 
         self.embed = tkinter.Frame(self.tkinter_window, width = framex, height = framey)
@@ -136,8 +136,8 @@ class Interface:
 
         # select which pathfinding algorithm to use
 
-        width = int((WIN_WIDTH / 100) * 2.4)
-        height = int(width / 10)
+        width = int((WIN_WIDTH / 100) * 2)
+        height = int(width / 5)
 
 
 
@@ -146,7 +146,7 @@ class Interface:
         font = ("SimSun", font_size)
 
         self.algorithm_frame = tkinter.Frame(background = "gainsboro")
-        self.algorithm_frame.grid(row = 1, column = 12)
+        self.algorithm_frame.grid(row = 1, column = 12, sticky = "n")
 
         self.pathfinding_algorithms_label = tkinter.Label(self.algorithm_frame, text = "Algorithms", bg = "cyan", width = width, height = height, font = font)
         self.pathfinding_algorithms_label.pack(pady = 7)
@@ -170,6 +170,18 @@ class Interface:
 
 
 
+        # maze selection
+        self.maze_frame = tkinter.Frame(background = "gainsboro")
+        self.maze_frame.grid(row = 1, column = 13, sticky = "n")
+
+        self.maze_label = tkinter.Label(self.maze_frame, text = "Mazes", bg = "cyan", width = width, height = height, font = font)
+        self.maze_label.pack(fill = "both", pady = 7)
+
+        self.prim_button = tkinter.Button(self.maze_frame, text = "Prims Algorithm", bg = "green2", width = width, height = height, font = font)
+        self.prim_button.pack(fill = "both", pady = 2)
+
+
+
 
 
         # settigs button
@@ -187,7 +199,6 @@ class Interface:
 
         for algorithm in self.algorithms:
             algorithm.configure(bg = "white")
-
 
         if selected_algorithm == "a_star":
             self.a_star_button.configure(bg = "green2")
@@ -217,63 +228,6 @@ def create_maze():
 
 
 
-
-
-
-
-
-
-
-
-def get_lowest_f_node(array):
-
-    min_f = min(array, key = attrgetter("fScore"))
-    return min_f
-
-
-# distance from current node and start node
-def find_g(current, start_pos):
-    g = get_distance(current, start_pos)
-    return g
-
-
-# distance from current node and target / destination / finish node
-def find_h(current, end_pos):
-
-    dx = abs(current.x - end_pos.x)
-    dy = abs(current.y - end_pos.y)
-
-    D = 1
-    D2 = 1
-    h = D * ( (dx + dy) + (D2 - 2 * D) * min(dx, dy))
-
-    return h
-
-
-# hscore and gscore added together
-def find_f(score1, score2):
-    return score1 + score2
-
-
-# distance from 2 points. also the hueristics, which is causing issues
-def get_distance(start, end):
-    x1 = start.x
-    y1 = start.y
-    x2 = end.x
-    y2 = end.y
-    distancex = sqr(x2 - x1)
-    distancey = sqr(y2 - y1)
-    distance = sqrt(distancex + distancey)
-    distance = distancex + distancey
-    return distance
-
-
-def sqr(number):
-    return number * number
-
-
-def sqrt(number):
-    return math.sqrt(number)
 
 
 
