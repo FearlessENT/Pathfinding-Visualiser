@@ -3,63 +3,7 @@ import colors
 import math
 from operator import attrgetter
 import time
-
-
-
-
-
-
-def get_lowest_f_node(array):
-
-    min_f = min(array, key = attrgetter("fScore"))
-    return min_f
-
-
-# distance from current node and start node
-def find_g(current, start_pos):
-    g = get_distance(current, start_pos)
-    return g
-
-
-# distance from current node and target / destination / finish node
-def find_h(current, end_pos):
-
-    dx = abs(current.x - end_pos.x)
-    dy = abs(current.y - end_pos.y)
-
-    D = 1
-    D2 = 1
-    h = D * ((dx + dy) + (D2 - 2 * D) * min(dx, dy))
-
-    return h
-
-
-# hscore and gscore added together
-def find_f(score1, score2):
-    return score1 + score2
-
-
-# distance from 2 points. also the hueristics, which is causing issues
-def get_distance(start, end):
-    x1 = start.x
-    y1 = start.y
-    x2 = end.x
-    y2 = end.y
-    distancex = sqr(x2 - x1)
-    distancey = sqr(y2 - y1)
-    distance = sqrt(distancex + distancey)
-    distance = distancex + distancey
-    return distance
-
-
-def sqr(number):
-    return number * number
-
-
-def sqrt(number):
-    return math.sqrt(number)
-
-
+from algorithms import algorithm_utils
 
 
 
@@ -79,9 +23,9 @@ def start_search(grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY):
         grid_utils.clean_grid(grid)
 
 
-        start_pos.gScore = find_g(start_pos, start_pos)
-        start_pos.hScore = find_h(start_pos, end_pos)
-        start_pos.fScore = find_f(start_pos.gScore, start_pos.hScore)
+        start_pos.gScore = algorithm_utils.find_g(start_pos, start_pos)
+        start_pos.hScore = algorithm_utils.find_h(start_pos, end_pos)
+        start_pos.fScore = algorithm_utils.find_f(start_pos.gScore, start_pos.hScore)
 
 
         openList = [start_pos]
@@ -92,12 +36,7 @@ def start_search(grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY):
         while len(openList) > 0:
 
 
-
-
-
-
-
-            current_node = get_lowest_f_node(openList)
+            current_node = algorithm_utils.get_lowest_f_node(openList)
 
             openList.remove(current_node)
             closedList.append(current_node)
@@ -130,8 +69,6 @@ def start_search(grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY):
                 current_node.color = colors.ORANGE
                 current_node.found = True
 
-            # if stop == True:
-            #     return
 
 
             time.sleep(PATHFINDER_DELAY)
