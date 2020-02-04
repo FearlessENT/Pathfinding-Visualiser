@@ -110,8 +110,9 @@ class Interface:
 
 
         # the buttons to control pathfinding
+        # below controls the width of the buttons to make fit in the window no matter what size window is
         but_width = int(WIN_WIDTH / 100)* 2
-        but_width = int(framex / 40)
+        but_width = int(framex / 45)
         but_height = int(WIN_HEIGHT / 100)
         but_height = int(framey / 200)
 

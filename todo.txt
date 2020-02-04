@@ -18,6 +18,8 @@ get dat karma
 
 add settings:     DONE
         add prim delay to settings
+        
+
 
 change win size   DONE
 grid size         DONE
@@ -31,6 +33,8 @@ be able to generate mazes IN PROGRESS
 Add to github    DONE
 
 fix greedy        DONE
+
+
 
 
 
