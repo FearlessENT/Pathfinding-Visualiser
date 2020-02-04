@@ -29,3 +29,7 @@ be able to generate mazes
 Add to github
 
 fix greedy
+
+
+
+git config --global http.sslVerify false
