@@ -17,19 +17,22 @@ post to reddit
 get dat karma
 
 add settings:     DONE
+        add prim delay to settings
+
 change win size   DONE
 grid size         DONE
 
 
 be able to save and load maps
 
-be able to generate mazes
+be able to generate mazes IN PROGRESS
 
 
-Add to github
+Add to github    DONE
 
-fix greedy
+fix greedy        DONE
 
 
 
 git config --global http.sslVerify false
+git config --global http.sslVerify true

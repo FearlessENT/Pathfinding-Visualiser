@@ -111,11 +111,19 @@ def clear_grid(grid):
             node.backtrack = False
             node.reset = False
 
-
-
-
-
-
             node.turn_to_free()
 
     stop = False
+
+
+
+
+
+def fill_grid(grid):
+
+    for row in grid:
+        for node in row:
+            if node.border == True:
+                pass
+            else:
+                node.turn_to_wall()

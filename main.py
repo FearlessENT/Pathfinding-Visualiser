@@ -11,6 +11,7 @@ import maze_prim
 import grid_utils
 import colors
 from algorithms import *
+from mazes import *
 
 
 
@@ -46,7 +47,7 @@ FPS = int(content[6])
 
 
 red = False
-stop = False
+
 
 global current_mode
 current_mode = "wall"
@@ -301,7 +302,6 @@ def current_clear_grid():
 def current_go(algorithm):
     print("Running...")
 
-
     if algorithm == "a_star":
         thread1 = threading.Thread(target = a_star.start_search, args = (grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY,))
         thread1.start()
@@ -313,8 +313,6 @@ def current_go(algorithm):
     elif algorithm == "greedy":
         thread1 = threading.Thread(target = greedy.start_search, args = (grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY,))
         thread1.start()
-#############################################################
-
 
     else:
         print("not programmed yet")
