@@ -311,7 +311,7 @@ def current_go(algorithm):
         thread1.start()
 
     elif algorithm == "greedy":
-        thread1 = threading.Thread(target = greedy.start_search, args - ())
+        thread1 = threading.Thread(target = greedy.start_search, args = (grid, PATHFINDER_DELAY, SHORTEST_PATH_DELAY,))
         thread1.start()
 #############################################################
 
