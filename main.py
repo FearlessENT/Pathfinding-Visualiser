@@ -78,6 +78,7 @@ class Interface:
     def __init__(self):
 
         self.current_algorithm = "diekstra"
+        self.current_maze = "prims"
 
         self.tkinter_window = tkinter.Tk()
         self.tkinter_window.geometry("{}x{}".format(WIN_WIDTH, WIN_HEIGHT))
@@ -129,7 +130,7 @@ class Interface:
         self.go_button.grid(row = 11, column = 4, padx = padxv, pady = padxv)
         self.clear_grid_button.grid(row = 11, column = 5, padx = padxv, pady = padxv)
 
-        self.create_maze_button = tkinter.Button(text = "Generate Maze", width = but_width, height = but_height, command = create_maze_control)
+        self.create_maze_button = tkinter.Button(text = "Generate Maze", width = but_width, height = but_height, command = lambda: create_maze_control(self.current_maze))
         self.create_maze_button.grid(row = 11, column = 6, padx = padxv, pady = padxv)
 
 
@@ -146,7 +147,7 @@ class Interface:
         font = ("SimSun", font_size)
 
         self.algorithm_frame = tkinter.Frame(background = "gainsboro")
-        self.algorithm_frame.grid(row = 1, column = 12, sticky = "n")
+        self.algorithm_frame.grid(row = 1, column = 12, sticky = "n", padx = 4)
 
         self.pathfinding_algorithms_label = tkinter.Label(self.algorithm_frame, text = "Algorithms", bg = "cyan", width = width, height = height, font = font)
         self.pathfinding_algorithms_label.pack(pady = 7)
@@ -172,14 +173,19 @@ class Interface:
 
         # maze selection
         self.maze_frame = tkinter.Frame(background = "gainsboro")
-        self.maze_frame.grid(row = 1, column = 13, sticky = "n")
+        self.maze_frame.grid(row = 1, column = 13, sticky = "n", padx = 4)
 
         self.maze_label = tkinter.Label(self.maze_frame, text = "Mazes", bg = "cyan", width = width, height = height, font = font)
         self.maze_label.pack(fill = "both", pady = 7)
 
-        self.prim_button = tkinter.Button(self.maze_frame, text = "Prims Algorithm", bg = "green2", width = width, height = height, font = font)
+        self.prim_button = tkinter.Button(self.maze_frame, text = "Prims Algorithm", bg = "green2", width = width, height = height, font = font, command = lambda: self.maze_select("prims"))
         self.prim_button.pack(fill = "both", pady = 2)
 
+        self.depth_button = tkinter.Button(self.maze_frame, text = "Depth-First", width = width, height = height, font = font, command = lambda: self.maze_select("depth"))
+        self.depth_button.pack(fill = "both", pady = 2)
+
+
+        self.mazes = [self.prim_button, self.depth_button]
 
 
 
@@ -211,22 +217,48 @@ class Interface:
 
 
 
+    def maze_select(self, selected_maze):
+
+        self.current_maze = selected_maze
+
+        for maze in self.mazes:
+            maze.configure(bg = "white")
+
+        if selected_maze == "prims":
+            self.prim_button.configure(bg = "green2")
+
+        elif selected_maze == "depth":
+            self.depth_button.configure(bg = "green2")
 
 
 
-def create_maze_control():
-
-    thread1 = threading.Thread(target = create_maze)
-    thread1.start()
 
 
 
+def create_maze_control(maze):
 
-def create_maze():
+
+    if maze == "prims":
+
+        thread1 = threading.Thread(target = create_maze_prim)
+        thread1.start()
+
+    elif maze == "depth":
+
+        thread1 = threading.Thread(target = create_maze_depth)
+        thread1.start()
+
+
+
+
+def create_maze_prim():
 
     prim.generate_maze(grid)
 
 
+def create_maze_depth():
+
+    depth_first.generate_maze(grid)
 
 
 
