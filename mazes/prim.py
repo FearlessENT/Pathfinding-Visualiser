@@ -95,6 +95,7 @@ def get_neighbors(node, grid):
 
 
 
+
 def get_frontier_nodes(node, grid):
 
     x = node.x
