@@ -184,8 +184,10 @@ class Interface:
         self.depth_button = tkinter.Button(self.maze_frame, text = "Depth-First", width = width, height = height, font = font, command = lambda: self.maze_select("depth"))
         self.depth_button.pack(fill = "both", pady = 2)
 
+        self.kruskal_button = tkinter.Button(self.maze_frame, text = "Kruskal", width = width, height = height, font = font, command = lambda: self.maze_select("kruskal"))
+        self.kruskal_button.pack(fill = "both", pady = 2)
 
-        self.mazes = [self.prim_button, self.depth_button]
+        self.mazes = [self.prim_button, self.depth_button, self.kruskal_button]
 
 
 
@@ -230,6 +232,9 @@ class Interface:
         elif selected_maze == "depth":
             self.depth_button.configure(bg = "green2")
 
+        elif selected_maze == "kruskal":
+            self.kruskal_button.configure(bg = "green2")
+
 
 
 
@@ -248,6 +253,11 @@ def create_maze_control(maze):
         thread1 = threading.Thread(target = create_maze_depth)
         thread1.start()
 
+    elif maze == "kruskal":
+
+        thread1 = threading.Thread(target = create_maze_kruskal)
+        thread1.start()
+
 
 
 
@@ -261,6 +271,8 @@ def create_maze_depth():
     depth_first.generate_maze(grid)
 
 
+def create_maze_kruskal():
+    kruskal.generate_maze(grid)
 
 
 
